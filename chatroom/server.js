@@ -26,7 +26,7 @@ function sendFile(res, filePath, fileContents){
   res.end(fileContents);
 }
 
-function serveStaic(res, cache, absPath){
+function serveStatic(res, cache, absPath){
   if(cache[absPath]){ // if file is cached in memory
     sendFile(res, absPath, cache[absPath]); // serve file from memory
   }else{
@@ -55,7 +55,7 @@ var server = http.createServer(function (req, res){
   }
   var absPath = './' + filePath;
   
-  serveStaic(res, cache, absPath);
+  serveStatic(res, cache, absPath);
 });
 
 server.listen(3000, function (){
