@@ -1,5 +1,8 @@
 var http = require('http');
 var url = require('url');
+var join = require('path').join;
+var fs = require('fs');
+var root = __dirname;
 var items = [];
 var server = http.createServer(function (req, res){ 
   switch(req.method){  // check http method by req.method property
@@ -37,6 +40,21 @@ var server = http.createServer(function (req, res){
       res.end(body);
       break;
     case 'DELETE':
+      var path = url.parse(req.url).pathname;
+      var i = parseInt(path.slice(1), 10);
+      
+      if(isNaN(i)){
+        res.statusCode = 400;
+        res.end('Invalid item id');
+      }else if(!items[i]){
+        res.statusCode = 404;
+        res.end('item not found');
+      }else{
+        items.splice(i, 1);
+        res.end('OK\n');
+      }
+      break;
+    case 'PUT':
       var path = url.parse(req.url).pathname;
       var i = parseInt(path.slice(1), 10);
       
