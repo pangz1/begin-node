@@ -16,6 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.set('photos', __dirname + '/public/photos');
+
 if(app.get('env') === 'production'){
   app.set('photos', '/mouted-volume/photos');
 }
@@ -64,3 +65,13 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+
+// var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/photo_app');
+// var Schema = new mongoose.Schema({
+//     name: String,
+//     path: String
+// });
+
+
